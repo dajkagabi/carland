@@ -1,26 +1,74 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+{/*Tailwind 4.1 már nem használja a tailwind.config.js hanem a global.css-t
+*/}
+{/*Ha használunk tailwind.config.js akkor itt is kell definiálni.*/}
+@theme {
+  --color-primary: #101828;
+  --color-secondary: #666708;
+  --color-accent: #ed1d24;
+  --color-accent-hover: #dd242a;
+  --color-body: #dedede;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+    body {
+        @apply text-primary bg-body;
+    }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+    p {
+        @apply text-secondary;
+    }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    .h1 {
+        @apply text-4xl xl:text-[64px] text-primary xl:leading-[72px] font-bold mb-[18px];
+    }
+
+    .h2 {
+        @apply text-4xl mb-6 font-bold;
+    }
+
+    .h3 {
+        @apply text-xl mb-4 font-semibold;
+    }
+
+    .description {
+        @apply text-base xl:text-xl xl:leading-8;
+    }
+
+    .section {
+        @apply w-full h-screen pt-[60px] xl:pt-[120px];
+    }
+
+    .btn {
+        @apply rounded-[10px] w-full uppercase font-medium text-white tracking-[2px] text-[13px] flex justify-center items-center transition-all duration-300;
+    }
+
+    .btn-sm {
+        @apply h-14;
+    }
+
+    .btn-lg {
+        @apply h-16;
+    }
+
+    .btn-cta {
+        @apply bg-primary h-[54px] rounded-[5px] px-4 transition-all duration-300;
+    }
+
+    .btn-primary {
+        @apply bg-primary;
+    }
+
+    .btn-secondary {
+        @apply bg-secondary;
+    }
+
+    .btn-accent {
+        @apply bg-accent hover:bg-accent-hover;
+    }
+
+    .active {
+        @apply text-accent;
+    }
 }
