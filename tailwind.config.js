@@ -14,6 +14,7 @@ export default {
         DEFAULT: '15px',
       },
     },
+    {/*Lehetváltoztatni majd, */}
     screens: {
       sm: '640px',
       md: '768px',
