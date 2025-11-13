@@ -1,5 +1,5 @@
 import About from "./components/About";
-import BackToTopBtn from "./components/BackToTopBtn";
+
 import Cars from "./components/Cars";
 import Cta from "./components/Cta";
 import Footer from "./components/Footer";
@@ -19,7 +19,6 @@ export default function Home() {
     <Why/>
     <Testimonial/>
     <Cta/>
-    <BackToTopBtn/>
     <Footer/>
     </main>
   );

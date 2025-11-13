@@ -2,17 +2,29 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { useMediaQuery } from "react-responsive"
 import { GiHamburgerMenu } from "react-icons/gi"
 import { AiOutlineClose } from "react-icons/ai"
 
 export default function Header() {
   const [header, setHeader] = useState(false)
   const [nav, setNav] = useState(false)
+  const [isDesktop, setIsDesktop] = useState(true) 
 
-  const desktopMode = useMediaQuery({
-    query: '(min-width: 1300px)',
-  })
+  // Képernyőméret kezelése
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 1300)
+    }
+
+    // Azonnal ellenőrizd
+    checkScreenSize()
+
+    // Event listener hozzáadása
+    window.addEventListener('resize', checkScreenSize)
+
+    // Cleanup
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
 
   // Scroll 
   useEffect(() => {
@@ -30,21 +42,38 @@ export default function Header() {
 
   // Csukva
   useEffect(() => {
-    if (desktopMode) {
+    if (isDesktop) {
       setNav(false)
     }
-  }, [desktopMode])
+  }, [isDesktop])
 
-  // Navigációs linkek
+  // Navigáció
   const navLinks = [
-    { name: 'HOME', href: '#home' },
-    { name: 'CARS', href: '#cars' },
-    { name: 'ABOUT', href: '#about' },
-    { name: 'WHY US', href: '#why' },
-    { name: 'TESTIMONIALS', href: '#testimonial' },
-    { name: 'CONTACT', href: '#contact' },
-    { name: 'SEARCHMOBILE', href: '#searchmobile' },
+    { name: 'HOME', href: 'home' },
+    { name: 'CARS', href: 'cars' },
+    { name: 'ABOUT', href: 'about' },
+    { name: 'WHY US', href: 'why' },
+    { name: 'TESTIMONIAL', href: 'testimonial' },
+    { name: 'CONTACT', href: 'cta' },
   ]
+
+  // Anchor navigáció 
+  const handleNavClick = (sectionId) => {
+    setNav(false) // Mobil menü bezárása
+    
+    setTimeout(() => {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        const offsetTop = element.offsetTop - 80 // Header magassága miatt offset
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        })
+      } else {
+        console.log(`Element with id '${sectionId}' not found`)
+      }
+    }, 100)
+  }
 
   return (
     <header
@@ -54,54 +83,60 @@ export default function Header() {
     >
       <div className='max-w-[1300px] mx-auto px-4 xl:px-0 flex items-center justify-between h-full'>
         {/* Logo */}
-        <Link href='#' className='flex items-center'>
+        <button 
+          onClick={() => handleNavClick('home')}
+          className='flex items-center cursor-pointer'
+        >
           <div className={`text-2xl font-bold transition-colors duration-300 ${
             header ? 'text-black' : 'text-black'
           }`}>
-             <Image
-            src='/icons/logo.svg'
-            alt='CarLand Logo'
-            width={200}
-            height={50}
-            className='h-12 w-auto'
-          />
-
+            <Image
+              src='/icons/logo.svg'
+              alt='CarLand Logo'
+              width={200}
+              height={50}
+              className='h-12 w-auto'
+              priority 
+            />
           </div>
-        </Link>
+        </button>
 
         {/* Asztali navigáció */}
-        {desktopMode && (
-          <nav className='hidden lg:flex items-center gap-8'>
+        {isDesktop && (
+          <nav className='flex items-center gap-8'>
             {navLinks.map((link) => (
-              <Link
+              <button
                 key={link.name}
-                href={link.href}
+                onClick={() => handleNavClick(link.href)}
                 className={`transition-colors duration-300 font-medium hover:text-red-600 ${
                   header ? 'text-black' : 'text-black'
                 }`}
               >
                 {link.name}
-              </Link>
+              </button>
             ))}
           </nav>
         )}
 
         {/* Asztali, RESERVE NOW */}
-        {desktopMode && (
-          <button className={`hidden lg:flex px-6 py-2 rounded-lg font-medium transition-colors duration-300 ${
-            header 
-              ? 'bg-red-600 text-black hover:bg-red-700' 
-              : 'bg-black text-white hover:bg-red-700'
-          }`}>
+        {isDesktop && (
+          <button 
+            onClick={() => handleNavClick('cars')}
+            className={`flex px-6 py-2 rounded-lg font-medium transition-colors duration-300 ${
+              header 
+                ? 'bg-red-600 text-white hover:bg-red-700' 
+                : 'bg-black text-white hover:bg-red-700'
+            }`}
+          >
             Reserve Now
           </button>
         )}
 
         {/* Mobil Gomb */}
-        {!desktopMode && (
+        {!isDesktop && (
           <button
             onClick={() => setNav(!nav)}
-            className={`text-3xl lg:hidden transition-colors duration-300 ${
+            className={`text-3xl transition-colors duration-300 ${
               header ? 'text-black' : 'text-black'
             }`}
           >
@@ -109,21 +144,23 @@ export default function Header() {
           </button>
         )}
 
-        {/* Mobil  */}
-        {!desktopMode && nav && (
+        {/* Mobil menü */}
+        {!isDesktop && nav && (
           <nav className='absolute left-0 right-0 top-full mt-0 bg-white shadow-lg border-t'>
             <div className='flex flex-col items-center gap-6 py-6 px-4'>
               {navLinks.map((link) => (
-                <Link
+                <button
                   key={link.name}
-                  href={link.href}
-                  onClick={() => setNav(false)}
+                  onClick={() => handleNavClick(link.href)}
                   className='text-black hover:text-red-600 transition-colors duration-300 font-medium text-lg'
                 >
                   {link.name}
-                </Link>
+                </button>
               ))}
-              <button className='bg-black text-white hover:bg-red-700 px-6 py-2 rounded-lg font-medium  transition-colors duration-300 w-full max-w-[200px]'>
+              <button 
+                onClick={() => handleNavClick('cars')}
+                className='bg-black text-white hover:bg-red-700 px-6 py-2 rounded-lg font-medium transition-colors duration-300 w-full max-w-[200px]'
+              >
                 Reserve Now
               </button>
             </div>

@@ -116,7 +116,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className='border-t border-gray-300 pt-6 text-center'>
+        <div className='border-t border-gray-700 pt-6 text-center'>
           {/* Copyright */}
           <p className='text-black text-sm'>
             Copyright © CarLand 2025. All rights reserved.

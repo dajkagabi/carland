@@ -256,7 +256,7 @@ export default function Cars() {
               <SwiperSlide key={car.id}>
                 <div className='bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 overflow-hidden group'>
                
-                  <div className='relative h-48 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-8'>
+                  <div className='relative h-48 bg-gradient-to from-gray-50 to-gray-100 flex items-center justify-center p-8'>
                     <Image
                       src={car.image}
                       alt={car.name}
@@ -274,7 +274,7 @@ export default function Cars() {
                         <h3 className='text-xl font-bold text-gray-900 mb-1'>
                           {car.name}
                         </h3>
-                        <p className='text-red-600 font-semibold text-sm uppercase tracking-wide'>
+                        <p className='text-red-800 font-semibold text-sm uppercase tracking-wide'>
                           {car.category}
                         </p>
                       </div>
@@ -297,10 +297,10 @@ export default function Cars() {
                       </span>
                     </div>
 
-                    {/*  - Első sor */}
+                    {/*  */}
                     <div className='grid grid-cols-3 gap-4 mb-4'>
                       <div className='flex flex-col items-center text-center'>
-                        <div className='text-red-600 mb-2'>
+                        <div className='text-red-800 mb-2'>
                           <SeatIcon />
                         </div>
                         <span className='text-xs font-medium text-gray-600'>
@@ -308,7 +308,7 @@ export default function Cars() {
                         </span>
                       </div>
                       <div className='flex flex-col items-center text-center'>
-                        <div className='text-red-600 mb-2'>
+                        <div className='text-red-800 mb-2'>
                           <SeatIcon />
                         </div>
                         <span className='text-xs font-medium text-gray-600'>
@@ -316,7 +316,7 @@ export default function Cars() {
                         </span>
                       </div>
                       <div className='flex flex-col items-center text-center'>
-                        <div className='text-red-600 mb-2'>
+                        <div className='text-red-800 mb-2'>
                           <FuelIcon />
                         </div>
                         <span className='text-xs font-medium text-gray-600'>
@@ -328,7 +328,7 @@ export default function Cars() {
                     {/*  - Második sor */}
                     <div className='grid grid-cols-3 gap-4 mb-6'>
                       <div className='flex flex-col items-center text-center'>
-                        <div className='text-red-600 mb-2'>
+                        <div className='text-red-800 mb-2'>
                           <EngineIcon />
                         </div>
                         <span className='text-xs font-medium text-gray-600'>
@@ -336,7 +336,7 @@ export default function Cars() {
                         </span>
                       </div>
                       <div className='flex flex-col items-center text-center'>
-                        <div className='text-red-600 mb-2'>
+                        <div className='text-red-800 mb-2'>
                           <GearshiftIcon />
                         </div>
                         <span className='text-xs font-medium text-gray-600'>
@@ -344,7 +344,7 @@ export default function Cars() {
                         </span>
                       </div>
                       <div className='flex flex-col items-center text-center'>
-                        <div className='text-red-600 mb-2'>
+                        <div className='text-red-800 mb-2'>
                           <WheelIcon />
                         </div>
                         <span className='text-xs font-medium text-gray-600'>
