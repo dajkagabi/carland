@@ -1,7 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-
-{/*v3 vagy a régebbi verziók használják már általában */}
-
 export default {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -11,16 +8,21 @@ export default {
   theme: {
     container: {
       padding: {
-        DEFAULT: '15px',
+        DEFAULT: '1rem',
+        sm: '1.5rem',
+        lg: '2rem',
       },
+      center: true,
     },
-    {/*Lehetváltoztatni majd, */}
     screens: {
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1300px',
-      2xl: '1536px',
+      'xs': '475px',     // Extra small - modernebb kisebb készülékek
+      'sm': '640px',     // Small - mobil vízszintes
+      'md': '768px',     // Medium - tablet
+      'lg': '1024px',    // Large - tablet vízszintes / kisebb laptop
+      'xl': '1280px',    // Extra large - laptop
+      '2xl': '1440px',   // 2X large - desktop
+      '3xl': '1920px',   // 3X large - nagy desktop
+      '4xl': '2560px',   // 4X large - 2K/4K monitorok
     },
     extend: {
       colors: {
@@ -32,6 +34,24 @@ export default {
         },
         body: '#dedede',
       },
+      //Grid rendszer
+      gridTemplateColumns: {
+        'fluid': 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+        'auto-fit': 'repeat(auto-fit, minmax(250px, 1fr))',
+      },
+      // Container 
+      containers: {
+        'xs': '20rem',
+        'sm': '24rem',
+        'md': '28rem',
+        'lg': '32rem',
+        'xl': '36rem',
+        '2xl': '42rem',
+      },
     },
   },
+  plugins: [
+    // Container queries plugin
+    require('@tailwindcss/container-queries'),
+  ],
 }
