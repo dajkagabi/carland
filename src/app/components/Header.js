@@ -14,7 +14,7 @@ export default function Header() {
     query: '(min-width: 1300px)',
   })
 
-  // Scroll effect for header
+  // Scroll 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 40) {
